@@ -6,6 +6,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
+from googletrans import Translator
+
+# create a translator object
+translator = Translator()
+
 
 #ask user for link
 link = input("Please enter the website link: ")
@@ -24,6 +29,9 @@ if not os.path.exists('images'):
 
 # Start a new Selenium session
 driver = webdriver.Chrome()
+
+#index for folders names
+folderIndex = 0
 
 for i in range(1, 10):
     # Set the website URL you want to download images from
@@ -46,13 +54,23 @@ for i in range(1, 10):
         driver.switch_to.window(driver.window_handles[1])
 
         # Extract the album title from the div with class 'album-title'
-        album_title_div = driver.find_element(By.CLASS_NAME, 'showalbumheader__gallerytitle')
-        album_name = album_title_div.text.strip().replace('/', '_') # replace any / with _
+        try:
+            album_title_div = driver.find_element(By.CLASS_NAME, 'showalbumheader__gallerytitle')
+        except NoSuchElementException:
+            print("No title found in this album.")
+            break
+        album_title_ch = album_title_div.text.strip()
+        album_title_en = translator.translate(album_title_ch, src='zh-CN', dest='en').text
 
         # Create a new directory for the album
-        album_dir = os.path.join('images', album_name)
+        folderIndex += 1
+        album_dir = os.path.join('images', f'album_{folderIndex}')
         if not os.path.exists(album_dir):
             os.makedirs(album_dir)
+
+        # Save the album title to a file inside the album directory
+        with open(os.path.join(album_dir, 'title.txt'), 'w', encoding='utf-8') as f:
+            f.write(album_title_en)
 
         # Get all data-ids of the images in the album
         try:
@@ -86,7 +104,11 @@ for i in range(1, 10):
             time.sleep(2)  # Wait for the page to load
 
             # Find the image element and get the value of the data-src attribute
-            image_element = driver.find_element(By.CLASS_NAME, "viewer__img")
+            try:
+                image_element = driver.find_element(By.CLASS_NAME, "viewer__img")
+            except NoSuchElementException:
+                print("No image element in this album.")
+                break
             image_url = image_element.get_attribute("src")
 
             # Download the image
@@ -97,7 +119,11 @@ for i in range(1, 10):
                 filename = os.path.join(album_dir, f'{i-1}.png')
             
             driver.get(image_url)
-            image_element = driver.find_element(By.XPATH, '//img')
+            try:
+                image_element = driver.find_element(By.XPATH, '//img')
+            except NoSuchElementException:
+                print("No img tag in this album.")
+                break
             image_element.screenshot(filename)
 
             # Close the tab and switch back to the main tab
