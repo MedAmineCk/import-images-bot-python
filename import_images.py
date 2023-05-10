@@ -1,5 +1,6 @@
 import os
 import time
+import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -18,7 +19,6 @@ link = input("Please enter the website link: ")
 #ask user for max images
 imageMaxNumber = input("Please enter the max images number: ")
 
-
 #config
 imageMax = int(imageMaxNumber)
 globalImageMax = imageMax
@@ -32,6 +32,12 @@ driver = webdriver.Chrome()
 
 #index for folders names
 folderIndex = 0
+# Load the downloaded album links from the file
+downloaded_albums = []
+if os.path.exists('downloaded_albums.json'):
+    with open('downloaded_albums.json', 'r') as f:
+        downloaded_albums = json.load(f)
+        folderIndex = len(downloaded_albums)
 
 for i in range(1, 10):
     # Set the website URL you want to download images from
@@ -49,9 +55,13 @@ for i in range(1, 10):
 
     # Loop through each album link and download all images in the album
     for album_link in album_links:
+        if album_link in downloaded_albums:
+            print(f"Skipping album: {album_link} (already downloaded)")
+            continue
         driver.execute_script("window.open('"+album_link+"', '_blank');")
-        time.sleep(2)  # Wait for the album page to load
         driver.switch_to.window(driver.window_handles[1])
+        # Wait for the page to load
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
         # Extract the album title from the div with class 'album-title'
         try:
@@ -59,8 +69,13 @@ for i in range(1, 10):
         except NoSuchElementException:
             print("No title found in this album.")
             break
-        album_title_ch = album_title_div.text.strip()
-        album_title_en = translator.translate(album_title_ch, src='zh-CN', dest='en').text
+        album_title_ch = album_title_div.text
+        try:
+            album_title_en = translator.translate(album_title_ch, src='zh-CN', dest='en').text
+        except Exception as e:
+            print('Translation error:', e)
+            album_title_en = album_title_ch
+        
 
         # Create a new directory for the album
         folderIndex += 1
@@ -101,7 +116,8 @@ for i in range(1, 10):
         for i in range(2, imageMax+2):
             # Switch to the new tab
             driver.switch_to.window(driver.window_handles[i])
-            time.sleep(2)  # Wait for the page to load
+            # Wait for the page to load
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
             # Find the image element and get the value of the data-src attribute
             try:
@@ -129,15 +145,25 @@ for i in range(1, 10):
             # Close the tab and switch back to the main tab
             #driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            time.sleep(2)  # Wait for the page to load
+            # Wait for the page to load
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
         #close all tabs including album tab
         for i in range(imageMax+1):
             driver.switch_to.window(driver.window_handles[1])
-            time.sleep(1)
+            # Wait for the page to load
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            time.sleep(1)
+            # Wait for the page to load
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+    
+        # Store the downloaded album link in the list
+        downloaded_albums.append(album_link)
+
+        # Save the downloaded album links to the file
+        with open('downloaded_albums.json', 'w') as f:
+            json.dump(downloaded_albums, f)
         
 
     
