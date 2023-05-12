@@ -1,5 +1,4 @@
 import os
-import time
 import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -15,9 +14,11 @@ translator = Translator()
 
 #ask user for link
 link = input("Please enter the website link: ")
+# link = "https://classic-football-fhirts052.x.yupoo.com/"
 
 #ask user for max images
 imageMaxNumber = input("Please enter the max images number: ")
+# imageMaxNumber = 2
 
 #config
 imageMax = int(imageMaxNumber)
@@ -82,10 +83,39 @@ for i in range(1, 10):
         album_dir = os.path.join('images', f'album_{folderIndex}')
         if not os.path.exists(album_dir):
             os.makedirs(album_dir)
-
+        
         # Save the album title to a file inside the album directory
         with open(os.path.join(album_dir, 'title.txt'), 'w', encoding='utf-8') as f:
             f.write(album_title_en)
+
+        #------------------ download the thumbnail --------------#
+        # find thumbnail img element
+        img_element = driver.find_elements(By.XPATH, "//div[@class='showalbumheader__gallerycover']//img")[0]
+
+        # get src attribute of img element
+        image_url = img_element.get_attribute("src")
+
+        # download image
+        filename = os.path.join(album_dir, f'main.png')
+
+        driver.execute_script("window.open('"+image_url+"', '_blank');")
+        driver.switch_to.window(driver.window_handles[2])
+        # Wait for the page to load
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+        
+        try:
+            image_element = driver.find_element(By.XPATH, '//img')
+        except NoSuchElementException:
+            print("No img tag in this album.")
+            break
+
+        image_element.screenshot(filename)
+        driver.close()
+        driver.switch_to.window(driver.window_handles[1])
+        # Wait for the page to load
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+
+        #------------------ download album images --------------#
 
         # Get all data-ids of the images in the album
         try:
@@ -101,10 +131,8 @@ for i in range(1, 10):
         else:
             imageMax = globalImageMax
 
-        new_data_ids = data_ids[-imageMax:]
-
         # Construct URLs for full-sized images and open them in new tabs
-        for index, data_id in enumerate(new_data_ids):
+        for index, data_id in enumerate(data_ids):
             if index < imageMax:
                 image_url = f"{link}{data_id}?uid=1"
                 driver.execute_script("window.open('"+image_url+"', '_blank');")
@@ -125,21 +153,10 @@ for i in range(1, 10):
             except NoSuchElementException:
                 print("No image element in this album.")
                 break
-            image_url = image_element.get_attribute("src")
 
             # Download the image
-            #first image name it main
-            if i == 2:
-                filename = os.path.join(album_dir, f'main.png')
-            else:
-                filename = os.path.join(album_dir, f'{i-1}.png')
+            filename = os.path.join(album_dir, f'{i-1}.png')
             
-            driver.get(image_url)
-            try:
-                image_element = driver.find_element(By.XPATH, '//img')
-            except NoSuchElementException:
-                print("No img tag in this album.")
-                break
             image_element.screenshot(filename)
 
             # Close the tab and switch back to the main tab
@@ -148,6 +165,7 @@ for i in range(1, 10):
             # Wait for the page to load
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
+        #------------------ close all tabs --------------#
         #close all tabs including album tab
         for i in range(imageMax+1):
             driver.switch_to.window(driver.window_handles[1])
