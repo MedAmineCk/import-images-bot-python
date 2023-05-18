@@ -30,149 +30,174 @@ albums_path = os.path.join(script_dir, "images")
 
 # Product ID to duplicate
 product_id = 11351  # Replace with the ID of the variable product
+try:
+    # Get product data
+    url = f"{woocommerce_url}/{product_id}"
+    response = requests.get(url, auth=(consumer_key, consumer_secret))
+    if response.status_code != 200:
+        print(f"Error retrieving product data: {response.json()}")
+        exit()
+    product_data = response.json()
 
-# Get product data
-url = f"{woocommerce_url}/{product_id}"
-response = requests.get(url, auth=(consumer_key, consumer_secret))
-if response.status_code != 200:
-    print(f"Error retrieving product data: {response.json()}")
-    exit()
-product_data = response.json()
-
-# Remove the original product ID from the data
-del product_data["id"]
-product_data["images"] = []
-product_data["status"] = "draft"
-
-# Iterate over each album folder
-for album_name in os.listdir(albums_path):
-    album_path = os.path.join(albums_path, album_name)
-    
-    # Read the album title from the title.txt file
-    title_file_path = os.path.join(album_path, "title.txt")
-    with open(title_file_path, "r") as title_file:
-        album_title = title_file.read().strip()
-    
-    # Create a slug from the album title
-    album_slug = album_title.lower().replace(" ", "-")
-
-    product_data["name"] = album_title
-    
-    # Upload thumbnail image
-    thumbnail_path = os.path.join(album_path, "main.png")
-    
-    # Open the image file and read the contents
-    with open(thumbnail_path, "rb") as f:
-        image_data = f.read()
-    
-    # Set the request headers and data for uploading the image to WordPress
-    wordpress_headers = {
-        "Content-Disposition": "attachment; filename=image.jpg",
-        "Content-Type": "image/jpeg",
-        "Authorization": "Basic {}".format(wordpress_credentials)
-    }
-    wordpress_data = image_data
-
-    # Make the POST request to upload the image to WordPress
-    wordpress_response = requests.post(wordpress_url, headers=wordpress_headers, data=wordpress_data)
-    
-    # Check if the request was successful
-    if wordpress_response.status_code == 201:
-        # Get the URL of the uploaded image
-        image_url = wordpress_response.json()["guid"]["rendered"]
-        print("Thumbnail image uploaded successfully with URL: {}".format(image_url))
-        # Set the product image URL in the product data
-        product_data["images"].append({
-            "src": image_url,
-            "position": 0
-        })
-    else:
-        print("Failed to upload thumbnail image: {}".format(wordpress_response.content))
-        
-    # Loop through the images in the album folder
-    position = 1
-    for filename in os.listdir(album_path):
-        if filename.endswith(".png") and filename != "main.png":
-            # Set the image file path
-            image_path = os.path.join(album_path, filename)
-
-            # Open the image file and read the contents
-            with open(image_path, "rb") as f:
-                image_data = f.read()
-
-            # Set the request headers and data for uploading the image to WordPress
-            wordpress_headers = {
-                "Content-Disposition": "attachment; filename={}".format(filename),
-                "Content-Type": "image/jpeg",
-                "Authorization": "Basic {}".format(wordpress_credentials)
-            }
-            wordpress_data = image_data
-
-            # Make the POST request to upload the image to WordPress
-            wordpress_response = requests.post(wordpress_url, headers=wordpress_headers, data=wordpress_data)
-
-            # Check if the request was successful
-            if wordpress_response.status_code == 201:
-                # Get the URL of the uploaded image
-                image_url = wordpress_response.json()["guid"]["rendered"]
-                print("Image uploaded successfully with URL: {}".format(image_url))
-                # Add the image URL to the product data
-                product_data["images"].append({
-                    "src": image_url,
-                    "position": position
-                })
-                position += 1
-            else:
-                print("Failed to upload image: {}".format(wordpress_response.content))
-
-
-    # Set the request headers and data for creating the product on WooCommerce
-    woocommerce_headers = {
-        "Content-Type": "application/json"
-    }
-    woocommerce_data = json.dumps(product_data)
-    woocommerce_auth = (consumer_key, consumer_secret)
-
-    # Make the POST request to create the product on WooCommerce
-    woocommerce_response = requests.post(woocommerce_url, headers=woocommerce_headers, data=woocommerce_data, auth=woocommerce_auth)
-
-    # Check if the request was successful
-    if woocommerce_response.status_code == 201:
-        # Print the ID of the created product
-        duplicated_product = woocommerce_response.json()
-        duplicated_product_id = duplicated_product["id"]
-        print("Product duplicated successfully with ID: {}".format(duplicated_product_id))
-
-        # Get the original product's variations
-        response = requests.get(
-            f"{woocommerce_url}/{product_id}/variations",
-            auth=(consumer_key, consumer_secret)
-        )
-        variations = response.json()
-
-        # Duplicate each variation and assign it to the duplicated product
-        for variation in variations:
-            del variation["id"]
-            del variation["date_created"]
-            del variation["date_modified"]
-            variation["product_id"] = duplicated_product_id
-            # Update variation prices
-            variation["regular_price"] = "35"  # Replace with the desired regular price
-
-            response = requests.post(
-                f"{woocommerce_url}/{duplicated_product_id}/variations",
-                auth=(consumer_key, consumer_secret),
-                data=json.dumps(variation),
-                headers={"Content-Type": "application/json"}
-            )
-
-            if response.status_code != 201:
-                print("Failed to duplicate variation. Status code: {}".format(response.status_code))
-    else:
-        print("Failed to duplicate product: {}".format(woocommerce_response.content))
-    
-    # Clear the album images from the product data
+    # Remove the original product ID from the data
+    del product_data["id"]
     product_data["images"] = []
+    product_data["status"] = "draft"
+
+
+    # Create the "successfully_uploaded_albums" file if it doesn't exist
+    successfully_uploaded_albums_file = os.path.join(script_dir, "successfully_uploaded_albums.json")
+    if not os.path.isfile(successfully_uploaded_albums_file):
+        with open(successfully_uploaded_albums_file, "w") as file:
+            json.dump([], file)
+            
+    # Load the previously uploaded albums from the file
+    with open(successfully_uploaded_albums_file, "r") as file:
+        successfully_uploaded_albums = json.load(file)
+
+    for album_name in os.listdir(albums_path):
+        album_path = os.path.join(albums_path, album_name)
+        if album_name in successfully_uploaded_albums:
+            print("Album already uploaded. Skipping...")
+            continue
+
+        
+        # Read the album title from the title.txt file
+        title_file_path = os.path.join(album_path, "title.txt")
+        with open(title_file_path, "r") as title_file:
+            album_title = title_file.read().strip()
+        
+        # Create a slug from the album title
+        album_slug = album_title.lower().replace(" ", "-")
+
+        product_data["name"] = album_title
+        
+        # Upload thumbnail image
+        thumbnail_path = os.path.join(album_path, "main.png")
+        
+        # Open the image file and read the contents
+        with open(thumbnail_path, "rb") as f:
+            image_data = f.read()
+        
+        # Set the request headers and data for uploading the image to WordPress
+        wordpress_headers = {
+            "Content-Disposition": "attachment; filename=image.jpg",
+            "Content-Type": "image/jpeg",
+            "Authorization": "Basic {}".format(wordpress_credentials)
+        }
+        wordpress_data = image_data
+
+        # Make the POST request to upload the image to WordPress
+        wordpress_response = requests.post(wordpress_url, headers=wordpress_headers, data=wordpress_data)
+        
+        # Check if the request was successful
+        if wordpress_response.status_code == 201:
+            # Get the URL of the uploaded image
+            image_url = wordpress_response.json()["guid"]["rendered"]
+            print("Thumbnail image uploaded successfully with URL: {}".format(image_url))
+            # Set the product image URL in the product data
+            product_data["images"].append({
+                "src": image_url,
+                "position": 0
+            })
+        else:
+            print("Failed to upload thumbnail image: {}".format(wordpress_response.content))
+            
+        # Loop through the images in the album folder
+        position = 1
+        for filename in os.listdir(album_path):
+            if filename.endswith(".png") and filename != "main.png":
+                # Set the image file path
+                image_path = os.path.join(album_path, filename)
+
+                # Open the image file and read the contents
+                with open(image_path, "rb") as f:
+                    image_data = f.read()
+
+                # Set the request headers and data for uploading the image to WordPress
+                wordpress_headers = {
+                    "Content-Disposition": "attachment; filename={}".format(filename),
+                    "Content-Type": "image/jpeg",
+                    "Authorization": "Basic {}".format(wordpress_credentials)
+                }
+                wordpress_data = image_data
+
+                # Make the POST request to upload the image to WordPress
+                wordpress_response = requests.post(wordpress_url, headers=wordpress_headers, data=wordpress_data)
+
+                # Check if the request was successful
+                if wordpress_response.status_code == 201:
+                    # Get the URL of the uploaded image
+                    image_url = wordpress_response.json()["guid"]["rendered"]
+                    print("Image uploaded successfully with URL: {}".format(image_url))
+                    # Add the image URL to the product data
+                    product_data["images"].append({
+                        "src": image_url,
+                        "position": position
+                    })
+                    position += 1
+                else:
+                    print("Failed to upload image: {}".format(wordpress_response.content))
+
+
+        # Set the request headers and data for creating the product on WooCommerce
+        woocommerce_headers = {
+            "Content-Type": "application/json"
+        }
+        woocommerce_data = json.dumps(product_data)
+        woocommerce_auth = (consumer_key, consumer_secret)
+
+        # Make the POST request to create the product on WooCommerce
+        woocommerce_response = requests.post(woocommerce_url, headers=woocommerce_headers, data=woocommerce_data, auth=woocommerce_auth)
+
+        # Check if the request was successful
+        if woocommerce_response.status_code == 201:
+            # Print the ID of the created product
+            duplicated_product = woocommerce_response.json()
+            duplicated_product_id = duplicated_product["id"]
+            print("Product duplicated successfully with ID: {}".format(duplicated_product_id))
+
+            # Get the original product's variations
+            response = requests.get(
+                f"{woocommerce_url}/{product_id}/variations",
+                auth=(consumer_key, consumer_secret)
+            )
+            variations = response.json()
+
+            # Duplicate each variation and assign it to the duplicated product
+            for variation in variations:
+                del variation["id"]
+                del variation["date_created"]
+                del variation["date_modified"]
+                variation["product_id"] = duplicated_product_id
+                # Update variation prices
+                variation["regular_price"] = "35"  # Replace with the desired regular price
+
+                response = requests.post(
+                    f"{woocommerce_url}/{duplicated_product_id}/variations",
+                    auth=(consumer_key, consumer_secret),
+                    data=json.dumps(variation),
+                    headers={"Content-Type": "application/json"}
+                )
+
+                if response.status_code == 201:
+                    print("duplicate variations added Successfully!.")
+                    successfully_uploaded_albums.append(album_name)
+                else:
+                    print("Failed to add variants: {}".format(response.status_code))
+        else:
+            print("Failed to duplicate product: {}".format(woocommerce_response.content))
+        
+        # Clear the album images from the product data
+        product_data["images"] = []
+        
+        # Print a separator for readability
+        print("="*50)
+except Exception as e:
+    print("An error occurred:", str(e))
     
-    # Print a separator for readability
-    print("="*50)
+finally:
+    # Save the successfully uploaded albums to a file
+    output_file_path = os.path.join(script_dir, "successfully_uploaded_albums.json")
+    with open(output_file_path, "w") as output_file:
+        json.dump(successfully_uploaded_albums, output_file)
