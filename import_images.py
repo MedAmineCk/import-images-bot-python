@@ -11,6 +11,7 @@ from googletrans import Translator
 # create a translator object
 translator = Translator()
 
+print('welcom to script version 4!')
 
 #ask user for link
 link = input("Please enter the website link: ")
@@ -40,6 +41,21 @@ if os.path.exists('downloaded_albums.json'):
         downloaded_albums = json.load(f)
         folderIndex = len(downloaded_albums)
 
+# Load the unDownloaded album links from the file
+unDownloaded_albums = []
+if os.path.exists('unDownloaded_albums.json'):
+    with open('downloaded_albums.json', 'r') as f:
+        unDownloaded_albums = json.load(f)
+        folderIndex = folderIndex + len(unDownloaded_albums)
+
+def unexpectedQuite(albumUrl):
+    driver.close()
+    driver.switch_to.window(driver.window_handles[0])
+    unDownloaded_albums.append(albumUrl)
+    # Save the downloaded album links to the file
+    with open('unDownloaded_albums.json', 'w') as f:
+        json.dump(unDownloaded_albums, f)
+
 for i in range(1, 10):
     # Set the website URL you want to download images from
     url = f"{link}albums?tab=gallery&page={i}"
@@ -64,12 +80,21 @@ for i in range(1, 10):
         # Wait for the page to load
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
+        try:
+            if driver.find_element(By.CLASS_NAME, 'empty__main'):
+                print("this album is empty")
+                unexpectedQuite(album_link)
+                continue
+        except NoSuchElementException:
+            print("not empty")
+
         # Extract the album title from the div with class 'album-title'
         try:
             album_title_div = driver.find_element(By.CLASS_NAME, 'showalbumheader__gallerytitle')
         except NoSuchElementException:
             print("No title found in this album.")
-            break
+            unexpectedQuite(album_link)
+            continue
         album_title_ch = album_title_div.text
         try:
             album_title_en = translator.translate(album_title_ch, src='zh-CN', dest='en').text
@@ -107,7 +132,8 @@ for i in range(1, 10):
             image_element = driver.find_element(By.XPATH, '//img')
         except NoSuchElementException:
             print("No img tag in this album.")
-            break
+            unexpectedQuite(album_link)
+            continue
 
         image_element.screenshot(filename)
         driver.close()
@@ -122,7 +148,8 @@ for i in range(1, 10):
             images = driver.find_elements(By.CLASS_NAME, "showalbum__children")
         except NoSuchElementException:
             print("No images found in this album.")
-            break
+            unexpectedQuite(album_link)
+            continue
         
         data_ids = [image.get_attribute("data-id") for image in images]
 
@@ -141,7 +168,7 @@ for i in range(1, 10):
 
         # Switch to each new tab and download the image
         # for i in range(2, len(data_ids)+2):
-        for i in range(2, imageMax+2):
+        for i in range(2, imageMax+1):
             # Switch to the new tab
             driver.switch_to.window(driver.window_handles[i])
             # Wait for the page to load

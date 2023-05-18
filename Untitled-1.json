@@ -1,0 +1,295 @@
+{
+  "name": "With number, 2002 season Flamengo away",
+  "slug": "11351-2-2",
+  "permalink": "https://zadexstore.com/product/11351-2-2/",
+  "date_created": "2023-05-02T16:29:18",
+  "date_created_gmt": "2023-05-02T16:29:18",
+  "date_modified": "2023-05-17T10:57:11",
+  "date_modified_gmt": "2023-05-17T10:57:11",
+  "type": "variable",
+  "status": "draft",
+  "featured": false,
+  "catalog_visibility": "visible",
+  "description": "<div class=\"productTitle title-wrapper--self-padded-tablet-down\">\n<div class=\"product-title-wrapper\">\n<h1 style=\"text-align: center;\"><strong>FREE SHIPPING TO ALL THE WORLD\u00a0 \u00a0///////////</strong></h1>\n</div>\n</div>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<div class=\"productTitle title-wrapper--self-padded-tablet-down\">\n<div class=\"product-title-wrapper\">\n<h1 style=\"text-align: center;\"></h1>\n<h1 style=\"text-align: center;\">///////////\u00a0 \u00a0DELIVERY TIME BETWEEN 4 TO 12 DAYS</h1>\n<p>&nbsp;</p>\n</div>\n</div>\n<p>&nbsp;</p>\n<div class=\"productTitle title-wrapper--self-padded-tablet-down\">\n<div class=\"product-title-wrapper\">THE AVAILABLE BADGES OR BATCH <a href=\"https://zadexstore.com/product/badges-batchs/\">https://zadexstore.com/product/badges-batchs/</a></div>\n</div>\n<div class=\"product__description rte\">\n<p>&nbsp;</p>\n</div>\n",
+  "short_description": "",
+  "sku": "",
+  "price": "35",
+  "regular_price": "",
+  "sale_price": "",
+  "date_on_sale_from": null,
+  "date_on_sale_from_gmt": null,
+  "date_on_sale_to": null,
+  "date_on_sale_to_gmt": null,
+  "on_sale": false,
+  "purchasable": true,
+  "total_sales": 0,
+  "virtual": false,
+  "downloadable": false,
+  "downloads": [],
+  "download_limit": -1,
+  "download_expiry": -1,
+  "external_url": "",
+  "button_text": "",
+  "tax_status": "taxable",
+  "tax_class": "",
+  "manage_stock": false,
+  "stock_quantity": null,
+  "backorders": "no",
+  "backorders_allowed": false,
+  "backordered": false,
+  "low_stock_amount": null,
+  "sold_individually": false,
+  "weight": "",
+  "dimensions": { "length": "", "width": "", "height": "" },
+  "shipping_required": true,
+  "shipping_taxable": true,
+  "shipping_class": "",
+  "shipping_class_id": 0,
+  "reviews_allowed": true,
+  "average_rating": "0.00",
+  "rating_count": 0,
+  "upsell_ids": [],
+  "cross_sell_ids": [],
+  "parent_id": 0,
+  "purchase_note": "",
+  "categories": [{ "id": 143, "name": "RETRO KITS", "slug": "retro-kits" }],
+  "tags": [],
+  "images": [
+    {
+      "src": "http://zadexstore.com/wp-content/uploads/2023/05/image-22.png",
+      "position": 0
+    },
+    {
+      "src": "http://zadexstore.com/wp-content/uploads/2023/05/1-32.png",
+      "position": 1
+    },
+    {
+      "src": "http://zadexstore.com/wp-content/uploads/2023/05/2-43.png",
+      "position": 2
+    }
+  ],
+  "attributes": [
+    {
+      "id": 0,
+      "name": "SIZE",
+      "position": 0,
+      "visible": true,
+      "variation": true,
+      "options": ["XS", "S", "M", "L", "XL", "XXL", "XXXL"]
+    }
+  ],
+  "default_attributes": [],
+  "variations": [
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "XS" }]
+    },
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "S" }]
+    },
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "M" }]
+    },
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "L" }]
+    },
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "XL" }]
+    },
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "XXL" }]
+    },
+    {
+      "regular_price": "35.00",
+      "attributes": [{ "name": "SIZE", "option": "XXXL" }]
+    }
+  ],
+  "grouped_products": [],
+  "menu_order": 0,
+  "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#36;</span>35.00</bdi></span>",
+  "related_ids": [],
+  "meta_data": [
+    { "id": 34451, "key": "_wp_page_template", "value": "default" },
+    { "id": 34452, "key": "woodmart_sguide_select", "value": "none" },
+    { "id": 34478, "key": "woodmart_price_unit_of_measure", "value": "" },
+    { "id": 34479, "key": "woodmart_fbt_bundles_id", "value": [""] },
+    { "id": 34480, "key": "woodmart_total_stock_quantity", "value": "" },
+    {
+      "id": 34481,
+      "key": "woodmart_wc_video_gallery",
+      "value": {
+        "11364": {
+          "video_type": "mp4",
+          "upload_video_id": "",
+          "upload_video_url": "",
+          "youtube_url": "",
+          "vimeo_url": "",
+          "autoplay": "0",
+          "video_size": "contain",
+          "video_control": "theme",
+          "hide_gallery_img": "0",
+          "hide_information": "0",
+          "audio_status": "unmute"
+        },
+        "11367": {
+          "video_type": "mp4",
+          "upload_video_id": "",
+          "upload_video_url": "",
+          "youtube_url": "",
+          "vimeo_url": "",
+          "autoplay": "0",
+          "video_size": "contain",
+          "video_control": "theme",
+          "hide_gallery_img": "0",
+          "hide_information": "0",
+          "audio_status": "unmute"
+        },
+        "11368": {
+          "video_type": "mp4",
+          "upload_video_id": "",
+          "upload_video_url": "",
+          "youtube_url": "",
+          "vimeo_url": "",
+          "autoplay": "0",
+          "video_size": "contain",
+          "video_control": "theme",
+          "hide_gallery_img": "0",
+          "hide_information": "0",
+          "audio_status": "unmute"
+        }
+      }
+    },
+    { "id": 34483, "key": "_product_360_image_gallery", "value": "" },
+    { "id": 34484, "key": "_woodmart_whb_header", "value": "none" },
+    { "id": 34485, "key": "_woodmart_main_layout", "value": "default" },
+    { "id": 34486, "key": "_woodmart_sidebar_width", "value": "default" },
+    { "id": 34487, "key": "_woodmart_custom_sidebar", "value": "none" },
+    { "id": 34488, "key": "_woodmart_new_label", "value": "" },
+    { "id": 34489, "key": "_woodmart_new_label_date", "value": "" },
+    { "id": 34490, "key": "_woodmart_swatches_attribute", "value": "" },
+    { "id": 34491, "key": "_woodmart_related_off", "value": "" },
+    { "id": 34492, "key": "_woodmart_product_video", "value": "" },
+    { "id": 34493, "key": "_woodmart_product_hashtag", "value": "" },
+    {
+      "id": 34494,
+      "key": "_woodmart_single_product_style",
+      "value": "inherit"
+    },
+    { "id": 34495, "key": "_woodmart_thums_position", "value": "inherit" },
+    { "id": 34496, "key": "_woodmart_extra_content", "value": "" },
+    { "id": 34497, "key": "_woodmart_extra_position", "value": "after" },
+    { "id": 34498, "key": "_woodmart_product_design", "value": "inherit" },
+    { "id": 34499, "key": "_woodmart_product-background", "value": "" },
+    { "id": 34500, "key": "_woodmart_hide_tabs_titles", "value": "" },
+    { "id": 34501, "key": "_woodmart_product_custom_tab_title", "value": "" },
+    {
+      "id": 34502,
+      "key": "_woodmart_product_custom_tab_content_type",
+      "value": "text"
+    },
+    { "id": 34503, "key": "_woodmart_product_custom_tab_content", "value": "" },
+    {
+      "id": 34504,
+      "key": "_woodmart_product_custom_tab_html_block",
+      "value": ""
+    },
+    { "id": 34505, "key": "_woodmart_product_custom_tab_title_2", "value": "" },
+    {
+      "id": 34506,
+      "key": "_woodmart_product_custom_tab_content_type_2",
+      "value": "text"
+    },
+    {
+      "id": 34507,
+      "key": "_woodmart_product_custom_tab_content_2",
+      "value": ""
+    },
+    {
+      "id": 34508,
+      "key": "_woodmart_product_custom_tab_html_block_2",
+      "value": ""
+    },
+    {
+      "id": 34563,
+      "key": "_rednao_advanced_product_options",
+      "value": "{\"Rows\":[{\"Columns\":[{\"Field\":{\"Id\":5,\"Type\":\"dropdown\",\"Label\":\"NAME AND NUMBER\",\"Required\":false,\"RowId\":0,\"Conditions\":[],\"FieldName\":\"field_5\",\"SkipInCart\":false,\"FieldActions\":[],\"CustomCSS\":\"\",\"Formulas\":[],\"Description\":\"\",\"ShowDescriptionType\":\"\",\"Tooltip\":\"\",\"GlobalId\":null,\"PriceType\":\"options\",\"Price\":\"\",\"SalePrice\":\"\",\"HidePrice\":true,\"ShowQuantitySelector\":false,\"QuantityPosition\":\"bottom\",\"QuantityMinimumValue\":0,\"QuantityMaximumValue\":0,\"QuantityDefaultValue\":\"\",\"QuantityPlaceholder\":\"\",\"QuantityLabel\":\"Quantity\",\"Options\":[{\"Label\":\"SIMPLE\",\"RegularPrice\":\"0\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":4,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"none\",\"Ref\":\"\",\"Tag\":null},{\"Label\":\"NAME \",\"RegularPrice\":\"2\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":1,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"none\",\"Ref\":\"\",\"Tag\":null},{\"Label\":\"NUMBER\",\"RegularPrice\":\"2\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":2,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"none\",\"Ref\":\"\",\"Tag\":null},{\"Label\":\"NAME AND NUMBER\",\"RegularPrice\":\"4\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":3,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"none\",\"Ref\":\"\",\"Tag\":null}],\"AdditionalOptionColumn\":[],\"Placeholder\":\"Please select a value\",\"Icon\":{\"ImageType\":\"icon\",\"Ref\":{\"Name\":\"address-book\"}},\"ShowOptionsPrice\":false,\"Prefix\":\" +\",\"SkipWhenPriceIsZero\":true},\"WidthPercentage\":100}],\"StepId\":0},{\"Columns\":[{\"Field\":{\"Id\":2,\"Type\":\"checkbox\",\"Label\":\"Checkbox\",\"Required\":false,\"RowId\":0,\"Conditions\":[],\"FieldName\":\"field_2\",\"SkipInCart\":false,\"FieldActions\":[],\"CustomCSS\":\"\",\"Formulas\":[],\"Description\":\"\",\"ShowDescriptionType\":\"\",\"Tooltip\":\"\",\"GlobalId\":null,\"PriceType\":\"options\",\"Price\":\"\",\"SalePrice\":\"\",\"HidePrice\":true,\"ShowQuantitySelector\":false,\"QuantityPosition\":\"bottom\",\"QuantityMinimumValue\":0,\"QuantityMaximumValue\":0,\"QuantityDefaultValue\":\"\",\"QuantityPlaceholder\":\"\",\"QuantityLabel\":\"Quantity\",\"Options\":[{\"Label\":\"UCL BADGE\",\"RegularPrice\":\"2\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":1,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"image\",\"Ref\":{\"URLId\":11358,\"URL\":\"http://zadexstore.com/wp-content/uploads/2023/05/JPG_657f754f7704c863416bb2fb9e4b74c1.jpg\"},\"Tag\":null},{\"Label\":\"LEAGUE BADGE\",\"RegularPrice\":\"2\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":2,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"none\",\"Ref\":\"\",\"Tag\":null},{\"Label\":\"ANY OTHER BADGE\",\"RegularPrice\":\"2\",\"SalePrice\":\"\",\"PriceType\":\"fixed_amount\",\"Id\":3,\"Selected\":false,\"URL\":\"\",\"AdditionalOptionValue\":[],\"ImageType\":\"none\",\"Ref\":\"\",\"Tag\":null}],\"AdditionalOptionColumn\":[],\"Placeholder\":\"\",\"MaximumNumberOfItems\":0,\"ShowOptionsPrice\":false,\"ViewImageOnClick\":false},\"WidthPercentage\":100}],\"StepId\":0},{\"Columns\":[{\"Field\":{\"Id\":6,\"Type\":\"text\",\"Label\":\"EXTRA OPTIONS\",\"Required\":false,\"RowId\":0,\"Conditions\":[],\"FieldName\":\"field_6\",\"SkipInCart\":false,\"FieldActions\":[],\"CustomCSS\":\"\",\"Formulas\":[],\"Description\":\"\",\"ShowDescriptionType\":\"\",\"Tooltip\":\"\",\"GlobalId\":null,\"PriceType\":\"none\",\"Price\":\"\",\"SalePrice\":\"\",\"HidePrice\":true,\"ShowQuantitySelector\":false,\"QuantityPosition\":\"bottom\",\"QuantityMinimumValue\":0,\"QuantityMaximumValue\":0,\"QuantityDefaultValue\":\"\",\"QuantityPlaceholder\":\"\",\"QuantityLabel\":\"Quantity\",\"DefaultText\":\"\",\"Placeholder\":\"\",\"MaxLength\":0,\"FreeCharOrWords\":0,\"IgnoreSpaces\":false,\"Icon\":{\"ImageType\":\"icon\",\"Ref\":{\"Name\":\"clipboard\"}},\"ReadOnly\":false},\"WidthPercentage\":100}],\"StepId\":0}],\"Extensions\":[],\"DynamicFieldTypes\":[\"FBDropDown\",\"FBCheckBox\",\"FBTextField\"],\"Version\":1,\"Styles\":\".rnColumnField_2 .rednaoLabel{color:#1a4ac2 !important;}\",\"MapsApiKey\":\"\",\"Icons\":[{\"Name\":\"clipboard\",\"icon\":[384,512,[],\"f328\",\"M336 64h-80c0-35.29-28.71-64-64-64s-64 28.71-64 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h288c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h42v36c0 6.627 5.373 12 12 12h168c6.627 0 12-5.373 12-12v-36h42a6 6 0 0 1 6 6v340a6 6 0 0 1-6 6zM192 40c13.255 0 24 10.745 24 24s-10.745 24-24 24-24-10.745-24-24 10.745-24 24-24\"]},{\"Name\":\"address-book\",\"icon\":[448,512,[],\"f2b9\",\"M436 160c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20zm-228-32c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm112 236.8c0 10.6-10 19.2-22.4 19.2H118.4C106 384 96 375.4 96 364.8v-19.2c0-31.8 30.1-57.6 67.2-57.6h5c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h5c37.1 0 67.2 25.8 67.2 57.6v19.2z\"]}],\"MultipleSteps\":null,\"OptionsAmountLabel\":\"Options amount\",\"FinalTotalLabel\":\"Final Total\",\"OptionsAmountVisibility\":\"show\",\"TotalAmountVisibility\":\"show\",\"Fonts\":[],\"Script\":\"\",\"ExtensionsUsed\":[],\"AdditionalDependencies\":[]}"
+    },
+    { "id": 34564, "key": "_rednao_advanced_product_fees", "value": "[]" },
+    { "id": 34565, "key": "_rednao_advanced_product_server_list", "value": [] },
+    {
+      "id": 41068,
+      "key": "wd_page_css_files",
+      "value": [
+        "widget-recent-post-comments",
+        "widget-wd-recent-posts",
+        "widget-nav",
+        "widget-wd-layered-nav",
+        "woo-mod-swatches-base",
+        "woo-mod-swatches-filter",
+        "widget-layered-nav-stock-status",
+        "widget-product-list",
+        "widget-slider-price-filter",
+        "wp-gutenberg",
+        "revolution-slider",
+        "elementor-base",
+        "int-woo-extra-prod-opt",
+        "woocommerce-base",
+        "mod-star-rating",
+        "woo-el-track-order",
+        "woo-gutenberg",
+        "woo-mod-quantity",
+        "woo-opt-free-progress-bar",
+        "woo-mod-progress-bar",
+        "woo-single-prod-el-base",
+        "woo-mod-stock-status",
+        "woo-mod-shop-attributes",
+        "header-base",
+        "mod-tools",
+        "header-my-account",
+        "header-search",
+        "header-elements-base",
+        "header-cart-side",
+        "header-cart",
+        "widget-shopping-cart",
+        "woo-single-prod-builder",
+        "woo-el-breadcrumbs",
+        "woo-single-prod-el-navigation",
+        "woo-single-prod-el-gallery",
+        "woo-single-prod-el-gallery-opt-thumb-left",
+        "owl-carousel",
+        "photoswipe",
+        "woo-mod-variation-form",
+        "woo-mod-variation-form-single",
+        "social-icons",
+        "text-block",
+        "collapsible-content",
+        "section-title",
+        "woo-single-prod-el-reviews",
+        "woo-single-prod-el-reviews-style-1",
+        "mod-comments",
+        "widget-collapse",
+        "footer-base",
+        "widget-nav-mega-menu",
+        "scroll-top",
+        "wd-search-results",
+        "wd-search-form",
+        "mfp-popup",
+        "page-wishlist-popup",
+        "header-search-fullscreen",
+        "header-search-fullscreen-1",
+        "bottom-toolbar"
+      ]
+    }
+  ],
+  "stock_status": "instock",
+  "has_options": true,
+  "_links": {
+    "self": [{ "href": "https://zadexstore.com/wp-json/wc/v3/products/11351" }],
+    "collection": [{ "href": "https://zadexstore.com/wp-json/wc/v3/products" }]
+  }
+}
